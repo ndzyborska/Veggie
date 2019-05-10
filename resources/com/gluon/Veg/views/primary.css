@@ -1,3 +1,12 @@
 .view {
 
 }
+
+.button {
+
+        -fx-height: 500px; /* You must set a specified height */
+        -fx-background-position: center; /* Center the image */
+        -fx-background-size: cover;
+        -fx-background-color: black;
+        -fx-focus-color: white;
+}
