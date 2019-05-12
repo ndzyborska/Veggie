@@ -1,8 +1,16 @@
 package com.gluon.Veg.views;
+import com.gluon.Veg.Veggie;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.*;
+import org.apache.poi.ss.util.CellRangeAddress;
+import org.openxmlformats.schemas.spreadsheetml.x2006.main.*;
 import java.io.File;
+import org.apache.poi.ss.util.*;
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 public class ExcelReader{
 // should use main.class.getresource....
@@ -54,9 +62,33 @@ public class ExcelReader{
 
     }
 
+    ArrayList<Ingredients> getFood(String buttonId) {
 
-   void close()throws IOException,InvalidFormatException {
+            System.out.println("EXCEL READER: " + buttonId);
+
+        ArrayList<Ingredients> food = new ArrayList<>();
+        DataFormatter d = new DataFormatter();
+        Sheet sheet = workbook.getSheet(buttonId);
+
+        for (Row row : sheet) {
+            try {
+                food.add(new Ingredients(d.formatCellValue(row.getCell(0)),
+                        d.formatCellValue(row.getCell(1)),
+                        d.formatCellValue(row.getCell(2))));
+
+            } catch (NullPointerException e) {
+              System.out.print("Sheet not filled!") ;
+            }
+
+        }
+        return food;
+
+    }
+
+
+   void close()throws IOException {
            workbook.close();
+
    }
 
 // SHOULD RETURN AN ARRAY OR MAP AS ITS INEFFICIENT TO OPEN WORK BOOK TWICE!!! Maybe include it in main??

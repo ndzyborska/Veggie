@@ -9,16 +9,17 @@ import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 
+import java.io.IOException;
+
 public class IngredientsControl {
 
-    @FXML
     private String buttonId;
 
 
     @FXML
     private View recipes;
 
-    IngredientsControl(String buttonId) {
+    IngredientsControl(String buttonId) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("recipes.fxml"));
         loader.setController(this);
         this.buttonId = buttonId;
